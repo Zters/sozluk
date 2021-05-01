@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from "@react-native-community/netinfo";
 import Constants from './Src/Common/Constants';
 
+import Main from './Src/Main';
 import Disconnected from './Src/Screens/Disconnected/Disconnected';
 
 class App extends React.Component {
