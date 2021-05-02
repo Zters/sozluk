@@ -5,7 +5,6 @@ export default StyleSheet.create({
         flex: 1,
     },
     scrollView: {
-        flex: 1
     },
     caption2: {
         alignSelf: 'center',
@@ -79,8 +78,6 @@ export default StyleSheet.create({
         fontWeight: 'bold'
     },
     randomWordCard: {
-        flex: .5,
         backgroundColor: 'red',
-        marginBottom: 150
     }
 })

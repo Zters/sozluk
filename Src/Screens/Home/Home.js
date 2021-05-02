@@ -21,8 +21,8 @@ class Home extends React.Component {
         const SP = this.props.screenProps;
         const { navigate } = this.props.navigation;
         return (
-            <SafeAreaView style={Style.container}>
-                <ScrollView style={Style.scrollView}>
+            <View style={Style.container}>
+                <ScrollView style={Style.scrollView} keyboardDismissMode="none" keyboardShouldPersistTaps="handled">
                     <View style={Style.formGroup}>
                         <Text style={Style.caption2}>Sözlük</Text>
                         <Searchbar
@@ -75,13 +75,19 @@ class Home extends React.Component {
                                 <Card.Title title="Card Title" subtitle="Card Subtitle" />
                                 <Card.Content>
                                     <Title>Card title</Title>
+                                    <Title>Card title</Title>
+                                    <Title>Card title</Title>
+                                    <Title>Card title</Title>
+                                    <Title>Card title</Title>
+                                    <Title>Card title</Title>
+                                    <Title>Card title</Title>
                                     <Paragraph>Card content</Paragraph>
                                 </Card.Content>
                             </Card>
                         </View>
                     </View>
                 </ScrollView>
-            </SafeAreaView>
+            </View>
         )
     }
 }

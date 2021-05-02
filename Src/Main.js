@@ -60,5 +60,5 @@ const MainNavigator = createStackNavigator({
         headerShown: true,
     }
 });
-console.log();
+
 export default createAppContainer(MainNavigator);
