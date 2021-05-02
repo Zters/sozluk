@@ -4,6 +4,7 @@ import {
     View,
 } from 'react-native';
 import { Text, TextInput, Button } from 'react-native-paper';
+import Constants from '../../Common/Constants';
 import Style from './Style';
 
 class Name extends React.Component {
@@ -13,6 +14,7 @@ class Name extends React.Component {
     }
 
     render() {
+        console.log(Constants);
         const SP = this.props.screenProps;
         const { navigate } = this.props.navigation;
         return (

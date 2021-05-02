@@ -60,6 +60,5 @@ const MainNavigator = createStackNavigator({
         headerShown: true,
     }
 });
-
-let Navigation = createAppContainer(MainNavigator);
-export default () => <Navigation theme="dark" />;
+console.log();
+export default createAppContainer(MainNavigator);
