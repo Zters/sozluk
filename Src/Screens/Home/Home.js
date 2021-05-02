@@ -21,7 +21,7 @@ class Home extends React.Component {
         const SP = this.props.screenProps;
         const { navigate } = this.props.navigation;
         return (
-            <View style={Style.container}>
+            <SafeAreaView style={Style.container}>
                 <ScrollView style={Style.scrollView} keyboardDismissMode="none" keyboardShouldPersistTaps="handled">
                     <View style={Style.formGroup}>
                         <Text style={Style.caption2}>Sözlük</Text>
@@ -38,8 +38,8 @@ class Home extends React.Component {
                             <Text style={Style.historyText}>
                                 ARAMA GEÇMİŞİ
                             </Text>
-                            <TouchableOpacity onPress={() => console.log("tıklandı")} style={Style.historyButton}>
-                                <Text style={Style.historyButtonText}>Arama Geçmişi</Text>
+                            <TouchableOpacity onPress={() => navigate('History')} style={Style.historyButton}>
+                                <Text style={Style.historyButtonText}>Geçmişi Görüntüle</Text>
                             </TouchableOpacity>
                             <FontAwesome name="angle-right" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
                         </View>
@@ -72,22 +72,15 @@ class Home extends React.Component {
                         <View style={Style.randomWordCard}>
                             <Text style={Style.randomWordText}>RASTGELE KELİME</Text>
                             <Card>
-                                <Card.Title title="Card Title" subtitle="Card Subtitle" />
                                 <Card.Content>
-                                    <Title>Card title</Title>
-                                    <Title>Card title</Title>
-                                    <Title>Card title</Title>
-                                    <Title>Card title</Title>
-                                    <Title>Card title</Title>
-                                    <Title>Card title</Title>
-                                    <Title>Card title</Title>
-                                    <Paragraph>Card content</Paragraph>
+                                    <Title>Koşu</Title>
+                                    <Paragraph>"Benim oğlanın göbeği çıkıyormuş da biraz, her sabah koşu yapıyor, dedi." - Nazım Hikmet</Paragraph>
                                 </Card.Content>
                             </Card>
                         </View>
                     </View>
                 </ScrollView>
-            </View>
+            </SafeAreaView >
         )
     }
 }

@@ -21,7 +21,6 @@ export default StyleSheet.create({
     },
     formGroup2: {
         width: '100%',
-        height: 500,
         borderTopStartRadius: 20,
         borderTopEndRadius: 20,
         alignSelf: 'center',
@@ -63,7 +62,7 @@ export default StyleSheet.create({
         alignSelf: 'center',
     },
     historyButton: {
-        marginLeft: 125,
+        marginLeft: 110,
         marginRight: 10
     },
     historyText: {
@@ -75,9 +74,9 @@ export default StyleSheet.create({
     },
     randomWordText: {
         marginTop: 20,
+        marginBottom: 20,
         fontWeight: 'bold'
     },
     randomWordCard: {
-        backgroundColor: 'red',
     }
 })

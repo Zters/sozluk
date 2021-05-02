@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-around',
     },
     caption: {
         fontWeight: 'bold',
@@ -21,16 +21,16 @@ export default StyleSheet.create({
         alignSelf: 'center',
         marginTop: '-10%'
     },
-    historyList: {
-        flex: .7,
+    qButton: {
+        width: '50%',
+        marginTop: '5%',
+        alignSelf: 'center'
     },
-    refresh: {
-        alignSelf: 'center',
-        alignItems: 'center',
-        width: '8%',
+    formThemeBtn: {
+        flex: .1,
     },
-    noRecord: {
+    themeBtn: {
+        width: '50%',
         alignSelf: 'center',
-        alignItems: 'center',
     }
 })
