@@ -24,11 +24,11 @@ class Disconnected extends React.Component {
         const SP = this.props.screenProps;
         return (
             <>
-                <SafeAreaView style={[Style.container, { backgroundColor: SP.activeTheme == "dark" ? "black" : "white" }]}>
+                <SafeAreaView style={Style.container}>
                     <View style={Style.formGroup}>
                         <Text style={Style.description}>İnternet bağlantınız yok!</Text>
-                        <Icon name="wifi-off" size={70} color={SP.activeTheme == "dark" ? "white" : "black"} style={Style.wifiIcon} />
-                        <Button icon="reload" mode="outlined" onPress={() => this.reTryConnect()} color={SP.activeTheme == "dark" ? "white" : "black"} style={[Style.reTryConnectionBtn, { backgroundColor: SP.activeTheme == "dark" ? "black" : "white", color: SP.activeTheme == "dark" ? "black" : "white" }]}><Text style={{ color: SP.activeTheme == "dark" ? "white" : "black" }}>Yeniden Dene</Text></Button>
+                        <Icon name="wifi-off" size={70} color="black" style={Style.wifiIcon} />
+                        <Button icon="reload" mode="outlined" onPress={() => this.reTryConnect()} color="black" style={[Style.reTryConnectionBtn, { backgroundColor: "red", color: "white" }]}><Text style={{ color: "white" }}>Yeniden Dene</Text></Button>
                     </View>
                 </SafeAreaView>
             </>

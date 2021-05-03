@@ -22,7 +22,7 @@ class Home extends React.Component {
         const { navigate } = this.props.navigation;
         return (
             <SafeAreaView style={Style.container}>
-                <ScrollView style={Style.scrollView} keyboardDismissMode="none" keyboardShouldPersistTaps="handled">
+                <ScrollView keyboardDismissMode="none" keyboardShouldPersistTaps="handled">
                     <View style={Style.formGroup}>
                         <Text style={Style.caption2}>Sözlük</Text>
                         <Searchbar
@@ -30,6 +30,7 @@ class Home extends React.Component {
                             onChangeText={searchQuery => this.setState({ searchQuery })}
                             value={this.state.searchQuery}
                             style={Style.searchbar}
+                            inputStyle={Style.searchbar}
                         />
                     </View>
                     <View style={Style.formGroup2}>
@@ -49,38 +50,46 @@ class Home extends React.Component {
                                 description="Hesaplamada, bir işlemci veya işlem birimi, bazı harici..."
                                 left={props => <List.Icon {...props} icon="folder" />}
                                 style={Style.historyCard}
+                                titleStyle={Style.historyCard}
+                                descriptionStyle={Style.historyCard2}
                             />
                             <List.Item
                                 title="İşlemci"
                                 description="Hesaplamada, bir işlemci veya işlem birimi, bazı harici..."
                                 left={props => <List.Icon {...props} icon="folder" />}
                                 style={Style.historyCard}
+                                titleStyle={Style.historyCard}
+                                descriptionStyle={Style.historyCard2}
                             />
                             <List.Item
                                 title="İşlemci"
                                 description="Hesaplamada, bir işlemci veya işlem birimi, bazı harici..."
                                 left={props => <List.Icon {...props} icon="folder" />}
                                 style={Style.historyCard}
+                                titleStyle={Style.historyCard}
+                                descriptionStyle={Style.historyCard2}
                             />
                             <List.Item
                                 title="İşlemci"
                                 description="Hesaplamada, bir işlemci veya işlem birimi, bazı harici..."
                                 left={props => <List.Icon {...props} icon="folder" />}
                                 style={Style.historyCard}
+                                titleStyle={Style.historyCard}
+                                descriptionStyle={Style.historyCard2}
                             />
                         </View>
-                        <View style={Style.randomWordCard}>
+                        <View>
                             <Text style={Style.randomWordText}>RASTGELE KELİME</Text>
-                            <Card>
+                            <Card style={Style.randomWordCard2}>
                                 <Card.Content>
-                                    <Title>Koşu</Title>
-                                    <Paragraph>"Benim oğlanın göbeği çıkıyormuş da biraz, her sabah koşu yapıyor, dedi." - Nazım Hikmet</Paragraph>
+                                    <Title style={Style.cardTitle}>Koşu</Title>
+                                    <Paragraph style={Style.cardParagraph}>"Benim oğlanın göbeği çıkıyormuş da biraz, her sabah koşu yapıyor, dedi." - Nazım Hikmet</Paragraph>
                                 </Card.Content>
                             </Card>
                         </View>
                     </View>
                 </ScrollView>
-            </SafeAreaView >
+            </SafeAreaView>
         )
     }
 }

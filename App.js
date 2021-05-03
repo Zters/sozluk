@@ -12,7 +12,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       isConnected: false,
-      activeTheme: "dark",
     }
   }
 
@@ -22,20 +21,9 @@ class App extends React.Component {
         'CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT, wanted TEXT, process_type TEXT, time TEXT)',
       );
       const netInfo = await NetInfo.fetch();
-      const activeTheme = await AsyncStorage.getItem('theme');
-      activeTheme != null ? this.setState({ activeTheme: activeTheme }) : await AsyncStorage.setItem('theme', 'dark')
       this.setState({ isConnected: netInfo.isConnected })
     } catch (error) {
       Alert.alert("Bir hata oluştu. Hata kodu: #1")
-    }
-  }
-
-  changeBackGround = async () => {
-    try {
-      await AsyncStorage.setItem('theme', this.state.activeTheme === "dark" ? "light" : "dark")
-      this.setState({ activeTheme: this.state.activeTheme === "dark" ? "light" : "dark" })
-    } catch (error) {
-      Alert.alert("Bir hata oluştu. Hata kodu: #2")
     }
   }
 
@@ -56,27 +44,16 @@ class App extends React.Component {
   }
 
   render() {
-    let themeColor = this.state.activeTheme === 'light' ? DefaultTheme : DarkTheme;
-    let theme = {
-      ...themeColor,
-      theme: this.state.activeTheme,
-      colors: {
-        ...themeColor.colors,
-        ...(this.state.activeTheme === 'light' ? this.lightColor : this.darkColor),
-      },
-    };
     return (
       <>
-        <PaperProvider theme={theme}>
+        <PaperProvider theme={DefaultTheme}>
           {this.state.isConnected
             ? <>
               <Main
-                theme={this.state.activeTheme}
+                theme="light"
                 ref={ref => this.navigator = ref}
                 screenProps={{
                   reloadApp: async () => await this.reloadApp(),
-                  changeBackGround: this.changeBackGround,
-                  activeTheme: this.state.activeTheme,
                   reTryConnect: this.reTryConnect,
                   ...this.state
                 }}
@@ -86,7 +63,6 @@ class App extends React.Component {
               <Disconnected
                 screenProps={{
                   reloadApp: async () => await this.reloadApp(),
-                  activeTheme: this.state.activeTheme,
                   reTryConnect: this.reTryConnect,
                 }} />
             </>}

@@ -52,8 +52,8 @@ class History extends React.Component {
                 <View style={Style.formGroup}>
                     <Text style={Style.caption2}>Sorgu Geçmişi</Text>
                 </View>
-                <TouchableOpacity onPress={() => (this.componentDidMount(), ToastAndroid.show("Başarıyla yenilendi.", ToastAndroid.SHORT))} style={Style.refresh}><Icon name="refresh-ccw" size={25} color={SP.activeTheme == "dark" ? "white" : "black"} /></TouchableOpacity>
-                <TouchableOpacity onPress={() => this.truncateTable()} style={Style.refresh}><Icon name="trash-2" size={25} color={SP.activeTheme == "dark" ? "white" : "black"} /></TouchableOpacity>
+                <TouchableOpacity onPress={() => (this.componentDidMount(), ToastAndroid.show("Başarıyla yenilendi.", ToastAndroid.SHORT))} style={Style.refresh}><Icon name="refresh-ccw" size={25} color="black" /></TouchableOpacity>
+                <TouchableOpacity onPress={() => this.truncateTable()} style={Style.refresh}><Icon name="trash-2" size={25} color="black" /></TouchableOpacity>
 
                 <View style={Style.historyList}>
                     <ScrollView style={Style.scrollView}>

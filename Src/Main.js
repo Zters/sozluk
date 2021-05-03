@@ -7,7 +7,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Home from './Screens/Home/Home';
 import Name from './Screens/Name/Name';
 import Search from './Screens/Search/Search';
-import Savedr from './Screens/Savedr/Savedr';
+import Saved from './Screens/Saved/Saved';
 import Word from './Screens/Word/Word';
 import History from './Screens/History/History';
 
@@ -21,14 +21,6 @@ const BottomNavigator = createMaterialBottomTabNavigator({
         navigationOptions: ({ navigation }) => ({
             tabBarIcon: tabBarIcon('home'),
             title: "Anasayfa",
-
-        })
-    },
-    Search: {
-        screen: Search,
-        navigationOptions: ({ navigation }) => ({
-            tabBarIcon: tabBarIcon('search'),
-            title: "Ara",
 
         })
     },
@@ -51,6 +43,9 @@ const BottomNavigator = createMaterialBottomTabNavigator({
     backBehavior: 'history',
     initialRouteName: 'Home',
     shifting: true,
+    barStyle: { backgroundColor: "white" },
+    activeColor: 'red',
+    inactiveColor: '#E1E4EB',
 });
 
 const MainNavigator = createStackNavigator({
@@ -76,7 +71,7 @@ const MainNavigator = createStackNavigator({
     initialRouteName: 'BottomNavigator',
     defaultNavigationOptions: {
         headerShown: true,
-    }
+    },
 });
 
 export default createAppContainer(MainNavigator);

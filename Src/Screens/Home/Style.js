@@ -1,17 +1,16 @@
 import { StyleSheet } from 'react-native'
+import Constants from '../../Common/Constants'
 
 export default StyleSheet.create({
     container: {
         flex: 1,
-    },
-    scrollView: {
     },
     caption2: {
         alignSelf: 'center',
         fontSize: 21,
         margin: '5%',
         color: 'white',
-        fontWeight: 'bold'
+        fontFamily: Constants.Bold
     },
     formGroup: {
         width: '100%',
@@ -36,12 +35,19 @@ export default StyleSheet.create({
         backgroundColor: 'transparent',
         marginTop: 10,
         width: '100%',
+        fontFamily: Constants.Bold,
+        fontSize: 18
+    },
+    historyCard2: {
+        fontSize: 16,
+        fontFamily: Constants.Medium,
+        marginBottom: 5,
         borderBottomColor: '#E1E4EB',
         borderBottomWidth: 1,
     },
     historyList: {
         backgroundColor: '#E8EBF2',
-        borderRadius: 30,
+        borderRadius: 20,
         margin: 5,
         width: '100%',
         alignSelf: 'center',
@@ -60,6 +66,7 @@ export default StyleSheet.create({
         height: 60,
         borderRadius: 20,
         alignSelf: 'center',
+        fontFamily: Constants.Bold
     },
     historyButton: {
         marginLeft: 110,
@@ -67,16 +74,34 @@ export default StyleSheet.create({
     },
     historyText: {
         color: '#8D9299',
+        fontFamily: Constants.Bold
     },
     historyButtonText: {
         color: '#8D9299',
-        fontWeight: 'bold'
+        fontFamily: Constants.Bold
     },
     randomWordText: {
         marginTop: 20,
         marginBottom: 20,
-        fontWeight: 'bold'
+        fontFamily: Constants.Bold
     },
-    randomWordCard: {
+    randomWordCard2: {
+        borderRadius: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 10
+    },
+    cardTitle: {
+        fontFamily: Constants.Bold,
+        fontSize: 22
+    },
+    cardParagraph: {
+        fontFamily: Constants.Italic,
+        fontSize: 16
     }
 })

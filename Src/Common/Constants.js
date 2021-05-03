@@ -6,6 +6,11 @@ const Constants = {
     siteUrl: "http://sozluk.gov.tr/",
     logo: "konum",
     SqlService: SqlService,
+    Light: 'ZillaSlab-Light',
+    Italic: 'ZillaSlab-Italic',
+    Medium: 'ZillaSlab-Medium',
+    Regular: 'ZillaSlab-Regular',
+    Bold: 'ZillaSlab-Bold',
 };
 
 export default Constants;

@@ -19,11 +19,6 @@ class Word extends React.Component {
             <SafeAreaView style={[Style.container]}>
                 <View style={Style.formGroup}>
                     <Text style={Style.caption2}>Sözlük Uygulaması</Text>
-                    <Button mode="outlined" onPress={() => navigate('Name')} color={SP.activeTheme == "dark" ? "white" : "black"} style={[Style.qButton, { backgroundColor: SP.activeTheme == "dark" ? "black" : "white", color: SP.activeTheme == "dark" ? "black" : "white" }]}><Text style={{ color: SP.activeTheme == "dark" ? "white" : "black" }}>İsim</Text></Button>
-                    <Button mode="outlined" onPress={() => navigate('Word')} color={SP.activeTheme == "dark" ? "white" : "black"} style={[Style.qButton, { backgroundColor: SP.activeTheme == "dark" ? "black" : "white", color: SP.activeTheme == "dark" ? "black" : "white" }]}><Text style={{ color: SP.activeTheme == "dark" ? "white" : "black" }}>Sözcük</Text></Button>
-                </View>
-                <View style={[Style.formThemeBtn]}>
-                    <Button icon="theme-light-dark" mode="outlined" onPress={() => (SP.changeBackGround(), SP.reloadApp())} color={SP.activeTheme == "dark" ? "white" : "black"} style={[Style.themeBtn, { backgroundColor: SP.activeTheme == "dark" ? "black" : "white" }]}><Text>{SP.activeTheme == "dark" ? "Beyaz Tema" : "Siyah Tema"}</Text></Button>
                 </View>
             </SafeAreaView>
         )
