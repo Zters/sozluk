@@ -18,10 +18,10 @@ export default StyleSheet.create({
         height: 90,
         alignSelf: 'center',
         backgroundColor: '#EC6E6E',
+        borderBottomLeftRadius: 50
     },
     formGroup2: {
         width: '100%',
-        borderTopStartRadius: 20,
         borderTopEndRadius: 20,
         alignSelf: 'center',
         backgroundColor: 'white',
@@ -31,7 +31,7 @@ export default StyleSheet.create({
     formGroup3: {
         flexDirection: 'row'
     },
-    historyCard: {
+    savedCard: {
         borderRadius: 15,
         backgroundColor: 'transparent',
         marginTop: 10,
@@ -39,15 +39,15 @@ export default StyleSheet.create({
         borderBottomColor: '#E1E4EB',
         borderBottomWidth: 1,
     },
-    historyButton: {
+    savedButton: {
         marginLeft: 110,
         marginRight: 10
     },
-    historyText: {
+    savedText: {
         color: '#8D9299',
         fontFamily: Constants.Bold
     },
-    historyButtonText: {
+    savedButtonText: {
         color: '#8D9299',
         fontFamily: Constants.Bold
 

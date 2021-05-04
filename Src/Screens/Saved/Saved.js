@@ -14,14 +14,14 @@ class Saved extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            history: []
+            saved: []
         }
     }
 
     componentDidMount() {
         try {
-            Constants.SqlService.select('history', '*').then(result => {
-                this.setState({ history: result })
+            Constants.SqlService.select('saved', '*').then(result => {
+                this.setState({ saved: result })
             })
         } catch (error) {
             console.log("Hata kodu: 1");
@@ -30,10 +30,10 @@ class Saved extends React.Component {
 
     truncateTable() {
         try {
-            Constants.SqlService.select('history', '*').then(result => {
+            Constants.SqlService.select('saved', '*').then(result => {
                 result.length != 0
                     ?
-                    Constants.SqlService.delete('history', '*').then(result2 => {
+                    Constants.SqlService.delete('saved', '*').then(result2 => {
                         console.log("Kayıtlı kelimeler silindi.");
                     })
                     : console.log("Kayıtlı kelime bulunamadı.");
@@ -43,7 +43,7 @@ class Saved extends React.Component {
         }
     }
 
-    instertHistoryTable() {
+    instertsavedTable() {
         try {
             const getDate = () => {
                 var date = new Date().getDate();
@@ -53,9 +53,9 @@ class Saved extends React.Component {
                 var min = new Date().getMinutes();
                 return hours + ':' + min + ' | ' + date + '/' + month + '/' + year;
             }
-            Constants.SqlService.insert('history', ['wanted', 'process_type', 'time'], ['Aranan', 'İşlem Tipi', getDate()]);
+            Constants.SqlService.insert('saved', ['word', 'description', 'time'], ['Kelime', 'Açıklama', getDate()]);
 
-            Constants.SqlService.select('history', '*').then(result => {
+            Constants.SqlService.select('saved', '*').then(result => {
                 console.log(result);
             })
             this.componentDidMount();
@@ -65,7 +65,7 @@ class Saved extends React.Component {
     }
 
     render() {
-        console.log(this.state.history);
+        console.log(this.state.saved);
         const SP = this.props.screenProps;
         const { navigate } = this.props.navigation;
         return (
@@ -77,24 +77,24 @@ class Saved extends React.Component {
                     <View style={Style.formGroup2}>
                         <View style={Style.formGroup3}>
                             <FontAwesome name="star" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
-                            <Text style={Style.historyText}>
+                            <Text style={Style.savedText}>
                                 Favori Kelimeler
                             </Text>
-                            <TouchableOpacity onPress={() => this.truncateTable()} style={Style.historyButton}>
-                                <Text style={Style.historyButtonText}>Listeyi Temizle</Text>
+                            <TouchableOpacity onPress={() => this.truncateTable()} style={Style.savedButton}>
+                                <Text style={Style.savedButtonText}>Listeyi Temizle</Text>
                             </TouchableOpacity>
                             <FontAwesome name="trash" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
                         </View>
-                        <View style={Style.historyList}>
-                            {this.state.history.length != 0
-                                ? this.state.history.map((row, i) => {
+                        <View style={Style.savedList}>
+                            {this.state.saved.length != 0
+                                ? this.state.saved.map((row, i) => {
                                     return (
                                         <List.Item
                                             key={i}
                                             title={row.wanted}
                                             description={row.process_type}
                                             left={props => <List.Icon {...props} icon="folder" />}
-                                            style={Style.historyCard}
+                                            style={Style.savedCard}
                                         />
                                     )
                                 })

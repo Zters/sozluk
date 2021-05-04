@@ -21,6 +21,13 @@ export default {
                 }).catch((errorMessage, statusCode) => reject(errorMessage, statusCode))
         })
     },
+    proposal: function (value) {
+        return new Promise(async (resolve, reject) => {
+            this.get(this.siteUrl + "oneri?soz=" + value)
+                .then(content => resolve(content))
+                .catch(error => reject(error))
+        })
+    },
     nQuery: function (value) {
         return new Promise(async (resolve, reject) => {
             this.get(this.siteUrl + "adlar?ara=" + value)
@@ -37,7 +44,7 @@ export default {
     },
     wMQuery: function (value) {
         return new Promise(async (resolve, reject) => {
-            this.post(this.siteUrl2 + "getMeaning.php", value)
+            this.post(this.siteUrl + "gts?ara=", value)
                 .then(content => resolve(content))
                 .catch(error => reject(error))
         })

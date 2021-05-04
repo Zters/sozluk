@@ -17,11 +17,11 @@ export default StyleSheet.create({
         height: 170,
         alignSelf: 'center',
         backgroundColor: '#EC6E6E',
+        borderBottomLeftRadius: 50
     },
     formGroup2: {
         width: '100%',
-        borderTopStartRadius: 20,
-        borderTopEndRadius: 20,
+        borderTopEndRadius: 30,
         alignSelf: 'center',
         backgroundColor: 'white',
         marginTop: -15,
@@ -103,5 +103,18 @@ export default StyleSheet.create({
     cardParagraph: {
         fontFamily: Constants.Italic,
         fontSize: 16
+    },
+    proposal: {
+        position: 'absolute',
+        width: '85%',
+        alignSelf: 'center',
+        zIndex: 9999999,
+        top: 140,
+        backgroundColor: 'white',
+        borderRadius: 20
+    },
+    box: {
+        width: 50,
+        height: 50
     }
 })

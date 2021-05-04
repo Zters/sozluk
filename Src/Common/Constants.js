@@ -1,5 +1,6 @@
 import Api from './Api';
-import SqlService from '../Common/SqlService';
+import SqlService, { componentDidMount } from './SqlService';
+import Tables from './Tables';
 
 const Constants = {
     ...Api,
@@ -11,6 +12,7 @@ const Constants = {
     Medium: 'ZillaSlab-Medium',
     Regular: 'ZillaSlab-Regular',
     Bold: 'ZillaSlab-Bold',
+    Tables
 };
 
 export default Constants;

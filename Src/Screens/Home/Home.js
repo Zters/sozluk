@@ -3,21 +3,51 @@ import {
     SafeAreaView,
     View,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    Animated,
+    LogBox
 } from 'react-native';
 import { Text, TextInput, Button, Searchbar, Card, Title, List, Paragraph } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Constants from '../../Common/Constants';
 import Style from './Style';
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchQuery: ''
+            searchQuery: '',
+            proposal: []
         }
     }
 
+    UNSAFE_componentWillMount = () => {
+        this.animatedWidth = new Animated.Value(50)
+        this.animatedHeight = new Animated.Value(100)
+    }
+
+
+    componentDidMount() {
+    }
+
+    test(word) {
+        word.length > 2
+            ? (Constants.proposal(word).then(result => {
+                this.setState({ proposal: result })
+            }), LogBox.ignoreLogs(['Animated: `useNativeDriver`']),
+                Animated.timing(this.animatedWidth, {
+                    toValue: 400,
+                    duration: 0,
+                }).start(),
+                Animated.timing(this.animatedHeight, {
+                    toValue: 300,
+                    duration: 500,
+                }).start())
+            : this.setState({ proposal: [] })
+    }
+
     render() {
+        const animatedStyle = { width: this.animatedWidth, height: this.animatedHeight }
         const SP = this.props.screenProps;
         const { navigate } = this.props.navigation;
         return (
@@ -27,22 +57,48 @@ class Home extends React.Component {
                         <Text style={Style.caption2}>Sözlük</Text>
                         <Searchbar
                             placeholder="Bir arama gerçekleştir..."
-                            onChangeText={searchQuery => this.setState({ searchQuery })}
+                            onChangeText={searchQuery => (this.setState({ searchQuery }), this.test(searchQuery))}
                             value={this.state.searchQuery}
                             style={Style.searchbar}
                             inputStyle={Style.searchbar}
                         />
                     </View>
+                    {this.state.proposal.length != 0
+                        ? <>
+                            <View style={Style.proposal}>
+                                <Animated.View style={[Style.box, animatedStyle]}>
+                                    {this.state.proposal.map((row, i) => {
+                                        return (
+                                            i <= 4 ?
+                                                <TouchableOpacity key={i} onPress={() => navigate('History')}>
+                                                    <List.Item
+                                                        title={row.madde}
+                                                        left={props => <FontAwesome name="font" style={{ margin: 5, color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />}
+                                                        right={props => <FontAwesome name="chevron-circle-right" style={{ margin: 5, color: '#8D9299', alignSelf: 'flex-start', fontSize: 20, marginRight: 60 }} />}
+                                                        titleStyle={Style.historyCard}
+                                                    />
+                                                </TouchableOpacity>
+                                                : <List.Item
+                                                    key={i}
+                                                    style={{ opacity: 0 }}
+                                                />
+                                        )
+                                    })}
+                                </Animated.View>
+                            </View>
+                        </>
+                        : <></>
+                    }
                     <View style={Style.formGroup2}>
                         <View style={Style.formGroup3}>
-                            <FontAwesome name="history" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
+                            <FontAwesome name="history" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />
                             <Text style={Style.historyText}>
                                 ARAMA GEÇMİŞİ
                             </Text>
                             <TouchableOpacity onPress={() => navigate('History')} style={Style.historyButton}>
                                 <Text style={Style.historyButtonText}>Geçmişi Görüntüle</Text>
                             </TouchableOpacity>
-                            <FontAwesome name="angle-right" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
+                            <FontAwesome name="angle-right" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />
                         </View>
                         <View style={Style.historyList}>
                             <List.Item
@@ -89,7 +145,7 @@ class Home extends React.Component {
                         </View>
                     </View>
                 </ScrollView>
-            </SafeAreaView>
+            </SafeAreaView >
         )
     }
 }
