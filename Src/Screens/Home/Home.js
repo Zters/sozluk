@@ -5,6 +5,7 @@ import {
     ScrollView,
     TouchableOpacity,
     Animated,
+    ToastAndroid,
     LogBox
 } from 'react-native';
 import { Text, TextInput, Button, Searchbar, Card, Title, List, Paragraph } from 'react-native-paper';
@@ -31,19 +32,25 @@ class Home extends React.Component {
     }
 
     test(word) {
-        word.length > 2
-            ? (Constants.proposal(word).then(result => {
-                this.setState({ proposal: result })
-            }), LogBox.ignoreLogs(['Animated: `useNativeDriver`']),
-                Animated.timing(this.animatedWidth, {
-                    toValue: 400,
-                    duration: 0,
-                }).start(),
-                Animated.timing(this.animatedHeight, {
-                    toValue: 300,
-                    duration: 500,
-                }).start())
-            : this.setState({ proposal: [] })
+        try {
+            word.length > 2
+                ? (Constants.proposal(word).then(result => {
+                    this.setState({ proposal: result })
+                }), LogBox.ignoreLogs(['Animated: `useNativeDriver`']),
+                    Animated.timing(this.animatedWidth, {
+                        toValue: 400,
+                        duration: 0,
+                    }).start(),
+                    Animated.timing(this.animatedHeight, {
+                        toValue: 300,
+                        duration: 500,
+                    }).start(),
+                    ToastAndroid.show("Arama başarılı.", ToastAndroid.SHORT))
+                : this.setState({ proposal: [] })
+        } catch (error) {
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: #6", ToastAndroid.SHORT)
+        }
+
     }
 
     render() {
