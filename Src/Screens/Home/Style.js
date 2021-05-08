@@ -105,13 +105,20 @@ export default StyleSheet.create({
         fontSize: 16
     },
     proposal: {
-        position: 'absolute',
-        width: '85%',
+        width: '95%',
         alignSelf: 'center',
-        zIndex: 9999999,
-        top: 140,
-        backgroundColor: 'white',
-        borderRadius: 20
+        backgroundColor: '#E8EBF2',
+        borderRadius: 20,
+        marginBottom: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 10,
+        marginTop: 25
     },
     box: {
         width: 50,

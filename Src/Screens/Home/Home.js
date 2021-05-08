@@ -70,33 +70,35 @@ class Home extends React.Component {
                             inputStyle={Style.searchbar}
                         />
                     </View>
-                    {this.state.proposal.length != 0
-                        ? <>
-                            <View style={Style.proposal}>
-                                <Animated.View style={[Style.box, animatedStyle]}>
-                                    {this.state.proposal.map((row, i) => {
-                                        return (
-                                            i <= 4 ?
-                                                <TouchableOpacity key={i} onPress={() => navigate('History')}>
-                                                    <List.Item
-                                                        title={row.madde}
-                                                        left={props => <FontAwesome name="font" style={{ margin: 5, color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />}
-                                                        right={props => <FontAwesome name="chevron-circle-right" style={{ margin: 5, color: '#8D9299', alignSelf: 'flex-start', fontSize: 20, marginRight: 60 }} />}
-                                                        titleStyle={Style.historyCard}
-                                                    />
-                                                </TouchableOpacity>
-                                                : <List.Item
-                                                    key={i}
-                                                    style={{ opacity: 0 }}
-                                                />
-                                        )
-                                    })}
-                                </Animated.View>
-                            </View>
-                        </>
-                        : <></>
-                    }
                     <View style={Style.formGroup2}>
+                        {this.state.proposal.length != 0
+                            ? <>
+                                <View style={Style.proposal}>
+                                    <Animated.View style={[Style.box, animatedStyle]}>
+                                        {this.state.proposal.map((row, i) => {
+                                            return (
+                                                i <= 4 ?
+                                                    <TouchableOpacity key={i} onPress={() => navigate('WordDetail', {
+                                                        word: row.madde,
+                                                    })}>
+                                                        <List.Item
+                                                            title={row.madde}
+                                                            left={props => <FontAwesome name="font" style={{ margin: 5, color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />}
+                                                            right={props => <FontAwesome name="chevron-circle-right" style={{ margin: 5, color: '#8D9299', alignSelf: 'flex-start', fontSize: 20, marginRight: 60 }} />}
+                                                            titleStyle={Style.historyCard}
+                                                        />
+                                                    </TouchableOpacity>
+                                                    : <List.Item
+                                                        key={i}
+                                                        style={{ opacity: 0 }}
+                                                    />
+                                            )
+                                        })}
+                                    </Animated.View>
+                                </View>
+                            </>
+                            : <></>
+                        }
                         <View style={Style.formGroup3}>
                             <FontAwesome name="history" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />
                             <Text style={Style.historyText}>

@@ -9,6 +9,7 @@ import Name from './Screens/Name/Name';
 import Search from './Screens/Search/Search';
 import Saved from './Screens/Saved/Saved';
 import Word from './Screens/Word/Word';
+import WordDetail from './Screens/WordDetail/WordDetail';
 import History from './Screens/History/History';
 
 const tabBarIcon = name => ({ tintColor }) => (
@@ -64,6 +65,12 @@ const MainNavigator = createStackNavigator({
         screen: Word,
         navigationOptions: {
             title: 'Sözcük Sorgula',
+        }
+    },
+    WordDetail: {
+        screen: WordDetail,
+        navigationOptions: {
+            title: 'Sözcük Bilgisi',
         }
     },
 }, {

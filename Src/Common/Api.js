@@ -2,7 +2,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 
 export default {
     siteUrl: "http://sozluk.gov.tr/",
-    siteUrl2: "http://api.iamtortue.com/sozluk/",
+    siteUrl2: "http://iamtortue.com/api/Sozluk/",
     get: function (value) {
         return new Promise((resolve, reject) => {
             RNFetchBlob.fetch('GET', value)
@@ -44,7 +44,7 @@ export default {
     },
     wMQuery: function (value) {
         return new Promise(async (resolve, reject) => {
-            this.post(this.siteUrl + "gts?ara=", value)
+            this.get(this.siteUrl2 + "meaning.php?ara=" + value)
                 .then(content => resolve(content))
                 .catch(error => reject(error))
         })
