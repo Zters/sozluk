@@ -5,7 +5,7 @@ export default {
     History() {
         try {
             Constants.SqlService.query(
-                'CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT, wanted TEXT, process_type TEXT, time TEXT)',
+                'CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT, wanted TEXT, description TEXT, time TEXT)',
             );
         } catch (error) {
             console.log("History table created error");

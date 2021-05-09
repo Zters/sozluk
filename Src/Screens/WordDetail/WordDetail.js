@@ -42,7 +42,6 @@ class WordDetail extends React.Component {
     render() {
         const SP = this.props.screenProps;
         const { navigate } = this.props.navigation;
-        console.log(this.state.error);
         return (
             <SafeAreaView style={[Style.container]}>
                 {this.state.visible
@@ -61,8 +60,8 @@ class WordDetail extends React.Component {
                             </View>
                         </>
                     : <>
-                        <Placeholder Animation={ShineOverlay} style={{backgroundColor: 'red', width: 50}}>
-                            <PlaceholderLine />
+                        <Placeholder Animation={ShineOverlay}>
+                            <PlaceholderLine style={{ backgroundColor: 'red' }} width={50} />
                         </Placeholder>
                     </>
                 }

@@ -29,9 +29,12 @@ class Home extends React.Component {
 
 
     componentDidMount() {
+        Constants.SqlService.select('history', '*').then(res => {
+            console.log(res);
+        });
     }
 
-    test(word) {
+    queryWord(word) {
         try {
             word.length > 2
                 ? (Constants.proposal(word).then(result => {
@@ -53,6 +56,26 @@ class Home extends React.Component {
 
     }
 
+    async insertHistory(value) {
+        try {
+            const res = await Constants.wMQuery(value);
+            Constants.SqlService.insert(
+                'history',
+                [
+                    'wanted',
+                    'description',
+                    'time',
+                ],
+                [
+                    value,
+                    res.status == "success" ? res.result : "Açıklama bulunamadı.",
+                    Constants.Functions.getDate()
+                ])
+        } catch (error) {
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: #7", ToastAndroid.SHORT)
+        }
+    }
+
     render() {
         const animatedStyle = { width: this.animatedWidth, height: this.animatedHeight }
         const SP = this.props.screenProps;
@@ -64,7 +87,7 @@ class Home extends React.Component {
                         <Text style={Style.caption2}>Sözlük</Text>
                         <Searchbar
                             placeholder="Bir arama gerçekleştir..."
-                            onChangeText={searchQuery => (this.setState({ searchQuery }), this.test(searchQuery))}
+                            onChangeText={searchQuery => (this.setState({ searchQuery }), this.queryWord(searchQuery))}
                             value={this.state.searchQuery}
                             style={Style.searchbar}
                             inputStyle={Style.searchbar}
@@ -78,9 +101,12 @@ class Home extends React.Component {
                                         {this.state.proposal.map((row, i) => {
                                             return (
                                                 i <= 4 ?
-                                                    <TouchableOpacity key={i} onPress={() => navigate('WordDetail', {
-                                                        word: row.madde,
-                                                    })}>
+                                                    <TouchableOpacity key={i} onPress={
+                                                        () => (navigate('WordDetail', {
+                                                            word: row.madde,
+                                                        }),
+                                                            this.insertHistory(row.madde, "açıklama"))
+                                                    }>
                                                         <List.Item
                                                             title={row.madde}
                                                             left={props => <FontAwesome name="font" style={{ margin: 5, color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />}
