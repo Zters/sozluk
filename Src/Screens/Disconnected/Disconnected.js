@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, Alert } from 'react-native';
+import { SafeAreaView, View, Alert, ToastAndroid } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import Style from './Style';
@@ -16,7 +16,7 @@ class Disconnected extends React.Component {
             const result = await SP.reTryConnect();
             !result ? Alert.alert("Lütfen internet bağlantınızı kontrol edin.") : ""
         } catch (error) {
-            Alert.alert("Bir hata oluştu. Hata kodu: #4")
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000s2", ToastAndroid.SHORT)
         }
     }
 

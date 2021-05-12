@@ -1,5 +1,8 @@
 import React from 'react';
 import Constants from './Constants';
+import {
+    ToastAndroid
+} from 'react-native';
 
 export default {
     History() {
@@ -8,7 +11,7 @@ export default {
                 'CREATE TABLE IF NOT EXISTS history (id INTEGER PRIMARY KEY AUTOINCREMENT, wanted TEXT, description TEXT, time TEXT)',
             );
         } catch (error) {
-            console.log("History table created error");
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S100s1", ToastAndroid.SHORT)
         }
     },
 
@@ -18,7 +21,7 @@ export default {
                 'CREATE TABLE IF NOT EXISTS saved (id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT, description TEXT, time TEXT)',
             );
         } catch (error) {
-            console.log("History table created error");
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S100s2", ToastAndroid.SHORT)
         }
     }
 }

@@ -12,13 +12,15 @@ import { Text, TextInput, Button, Searchbar, Card, Title, List, Paragraph } from
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Constants from '../../Common/Constants';
 import Style from './Style';
+import { withNavigationFocus } from 'react-navigation';
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             searchQuery: '',
-            proposal: []
+            proposal: [],
+            history: []
         }
     }
 
@@ -29,9 +31,19 @@ class Home extends React.Component {
 
 
     componentDidMount() {
-        Constants.SqlService.select('history', '*').then(res => {
-            console.log(res);
-        });
+        try {
+            Constants.SqlService.select('history', '*').then(res => {
+                this.setState({ history: res });
+            });
+        } catch (error) {
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000e1", ToastAndroid.SHORT)
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.isFocused !== this.props.isFocused) {
+            this.componentDidMount();
+        }
     }
 
     queryWord(word) {
@@ -51,7 +63,7 @@ class Home extends React.Component {
                     ToastAndroid.show("Arama başarılı.", ToastAndroid.SHORT))
                 : this.setState({ proposal: [] })
         } catch (error) {
-            ToastAndroid.show("Bir hata oluştu. Hata kodu: #6", ToastAndroid.SHORT)
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000f2", ToastAndroid.SHORT)
         }
 
     }
@@ -72,7 +84,7 @@ class Home extends React.Component {
                     Constants.Functions.getDate()
                 ])
         } catch (error) {
-            ToastAndroid.show("Bir hata oluştu. Hata kodu: #7", ToastAndroid.SHORT)
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000h3", ToastAndroid.SHORT)
         }
     }
 
@@ -102,10 +114,13 @@ class Home extends React.Component {
                                             return (
                                                 i <= 4 ?
                                                     <TouchableOpacity key={i} onPress={
-                                                        () => (navigate('WordDetail', {
-                                                            word: row.madde,
-                                                        }),
-                                                            this.insertHistory(row.madde, "açıklama"))
+                                                        () => (
+                                                            this.insertHistory(row.madde, "açıklama"),
+                                                            navigate('WordDetail', {
+                                                                word: row.madde,
+                                                                onGoBack: () => this.componentDidMount(),
+                                                            })
+                                                        )
                                                     }>
                                                         <List.Item
                                                             title={row.madde}
@@ -135,40 +150,36 @@ class Home extends React.Component {
                             </TouchableOpacity>
                             <FontAwesome name="angle-right" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />
                         </View>
-                        <View style={Style.historyList}>
-                            <List.Item
-                                title="İşlemci"
-                                description="Hesaplamada, bir işlemci veya işlem birimi, bazı harici..."
-                                left={props => <List.Icon {...props} icon="folder" />}
-                                style={Style.historyCard}
-                                titleStyle={Style.historyCard}
-                                descriptionStyle={Style.historyCard2}
-                            />
-                            <List.Item
-                                title="İşlemci"
-                                description="Hesaplamada, bir işlemci veya işlem birimi, bazı harici..."
-                                left={props => <List.Icon {...props} icon="folder" />}
-                                style={Style.historyCard}
-                                titleStyle={Style.historyCard}
-                                descriptionStyle={Style.historyCard2}
-                            />
-                            <List.Item
-                                title="İşlemci"
-                                description="Hesaplamada, bir işlemci veya işlem birimi, bazı harici..."
-                                left={props => <List.Icon {...props} icon="folder" />}
-                                style={Style.historyCard}
-                                titleStyle={Style.historyCard}
-                                descriptionStyle={Style.historyCard2}
-                            />
-                            <List.Item
-                                title="İşlemci"
-                                description="Hesaplamada, bir işlemci veya işlem birimi, bazı harici..."
-                                left={props => <List.Icon {...props} icon="folder" />}
-                                style={Style.historyCard}
-                                titleStyle={Style.historyCard}
-                                descriptionStyle={Style.historyCard2}
-                            />
-                        </View>
+                        {this.state.history.length != 0
+                            ? this.state.history.map((row, i) => {
+                                return (
+                                    <>
+                                        <View style={Style.historyList}>
+                                            <TouchableOpacity key={i} onPress={
+                                                () => (
+                                                    navigate('WordDetail', {
+                                                        word: row.wanted,
+                                                    })
+                                                )
+                                            }>
+                                                <List.Item
+                                                    title={row.wanted}
+                                                    description={row.description}
+                                                    left={props => <List.Icon {...props} icon="folder" />}
+                                                    style={Style.historyCard}
+                                                    titleStyle={Style.historyCard}
+                                                    descriptionStyle={Style.historyCard2}
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
+                                    </>
+                                )
+                            }).reverse().slice(0, 5)
+                            : <>
+                                <View>
+                                    <Text style={Style.notFoundText}>Arama Geçmişi Bulunamadı.</Text>
+                                </View>
+                            </>}
                         <View>
                             <Text style={Style.randomWordText}>RASTGELE KELİME</Text>
                             <Card style={Style.randomWordCard2}>
@@ -185,4 +196,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default withNavigationFocus(Home);

@@ -3,12 +3,14 @@ import {
     SafeAreaView,
     View,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    ToastAndroid,
 } from 'react-native';
 import { Text, TextInput, Button, Searchbar, Card, Title, List, Paragraph } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Constants from '../../Common/Constants';
 import Style from './Style';
+import { withNavigationFocus } from 'react-navigation';
 
 class Saved extends React.Component {
     constructor(props) {
@@ -24,7 +26,14 @@ class Saved extends React.Component {
                 this.setState({ saved: result })
             })
         } catch (error) {
-            console.log("Hata kodu: 1");
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000e3", ToastAndroid.SHORT)
+        }
+    }
+
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.isFocused !== this.props.isFocused) {
+            this.componentDidMount();
         }
     }
 
@@ -39,7 +48,7 @@ class Saved extends React.Component {
                     : console.log("Kayıtlı kelime bulunamadı.");
             })
         } catch (error) {
-            console.log("Hata kodu: 2");
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000g4", ToastAndroid.SHORT)
         }
     }
 
@@ -60,7 +69,7 @@ class Saved extends React.Component {
             })
             this.componentDidMount();
         } catch (error) {
-            console.log("Hata kodu: 3");
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000f5", ToastAndroid.SHORT)
         }
     }
 
@@ -109,4 +118,4 @@ class Saved extends React.Component {
     }
 }
 
-export default Saved;
+export default withNavigationFocus(Saved);

@@ -2,6 +2,7 @@ import React from 'react';
 import {
     SafeAreaView,
     View,
+    ToastAndroid,
 } from 'react-native';
 import { Text, TextInput, Button } from 'react-native-paper';
 import Constants from '../../Common/Constants';
@@ -24,6 +25,10 @@ class WordDetail extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        this.props.navigation.state.params.onGoBack();
+    }
+
     componentDidMount() {
         try {
             const { word } = this.props.navigation.state.params;
@@ -35,7 +40,7 @@ class WordDetail extends React.Component {
                 })
                 : console.log("Kelime bulunamadı, servise de istek atılmadı.")
         } catch (error) {
-            console.log("Bir hata oluştu.");
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000f6", ToastAndroid.SHORT)
         }
     }
 

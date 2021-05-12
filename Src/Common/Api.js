@@ -2,7 +2,7 @@ import RNFetchBlob from 'rn-fetch-blob';
 
 export default {
     siteUrl: "http://sozluk.gov.tr/",
-    siteUrl2: "http://iamtortue.com/api/Sozluk/",
+    siteUrl2: "http://api.iamtortue.com/Sozluk/",
     get: function (value) {
         return new Promise((resolve, reject) => {
             RNFetchBlob.fetch('GET', value)

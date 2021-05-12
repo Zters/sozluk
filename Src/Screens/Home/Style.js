@@ -123,5 +123,11 @@ export default StyleSheet.create({
     box: {
         width: 50,
         height: 50
+    },
+    notFoundText: {
+        textAlign: 'center',
+        marginTop: 50,
+        fontSize: 20,
+        fontFamily: Constants.Light
     }
 })

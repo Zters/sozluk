@@ -3,12 +3,14 @@ import {
     SafeAreaView,
     View,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    ToastAndroid
 } from 'react-native';
 import { Text, TextInput, Button, Searchbar, Card, Title, List, Paragraph } from 'react-native-paper';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Constants from '../../Common/Constants';
 import Style from './Style';
+import { withNavigationFocus } from 'react-navigation';
 
 class History extends React.Component {
     constructor(props) {
@@ -26,7 +28,13 @@ class History extends React.Component {
                 });
             });
         } catch (error) {
-            ToastAndroid.show("Bir hata oluştu. Hata kodu: #5", ToastAndroid.SHORT)
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000e2", ToastAndroid.SHORT)
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.isFocused !== this.props.isFocused) {
+            this.componentDidMount();
         }
     }
 
@@ -38,7 +46,7 @@ class History extends React.Component {
                     : ToastAndroid.show("Silinebilir kayıt yok.", ToastAndroid.SHORT)
             });
         } catch (error) {
-            ToastAndroid.show("Bir hata oluştu. Hata kodu: #8", ToastAndroid.SHORT)
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000g3", ToastAndroid.SHORT)
         }
     }
 
@@ -47,43 +55,46 @@ class History extends React.Component {
         const SP = this.props.screenProps;
         return (
             <SafeAreaView style={Style.container}>
-            <ScrollView style={Style.scrollView} keyboardDismissMode="none" keyboardShouldPersistTaps="handled">
-                <View style={Style.formGroup}>
-                    <Text style={Style.caption2}>Arama Geçmişi</Text>
-                </View>
-                <View style={Style.formGroup2}>
-                    <View style={Style.formGroup3}>
-                        <FontAwesome name="history" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
-                        <Text style={Style.historyText}>
-                            Arama Geçmişini
+                <ScrollView style={Style.scrollView} keyboardDismissMode="none" keyboardShouldPersistTaps="handled">
+                    <View style={Style.formGroup}>
+                        <Text style={Style.caption2}>Arama Geçmişi</Text>
+                    </View>
+                    <View style={Style.formGroup2}>
+                        <View style={Style.formGroup3}>
+                            <FontAwesome name="history" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
+                            <Text style={Style.historyText}>
+                                Arama Geçmişini
                         </Text>
-                        <TouchableOpacity onPress={() => this.truncateTable()} style={Style.historyButton}>
-                            <Text style={Style.historyButtonText}>Listeyi Temizle</Text>
-                        </TouchableOpacity>
-                        <FontAwesome name="trash" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
+                            <TouchableOpacity onPress={() => this.truncateTable()} style={Style.historyButton}>
+                                <Text style={Style.historyButtonText}>Listeyi Temizle</Text>
+                            </TouchableOpacity>
+                            <FontAwesome name="trash" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
+                        </View>
+                        <View style={Style.historyList}>
+                            {this.state.history.length != 0
+                                ? this.state.history.map((row, i) => {
+                                    return (
+                                        <List.Item
+                                            key={i}
+                                            title={row.wanted}
+                                            description={row.process_type}
+                                            left={props => <List.Icon {...props} icon="folder" />}
+                                            style={Style.historyCard}
+                                        />
+                                    )
+                                }).reverse().slice(0, 20)
+                                : <>
+                                    <View>
+                                        <Text style={Style.notFoundText}>Arama Geçmişi Bulunamadı.</Text>
+                                    </View>
+                                </>
+                            }
+                        </View>
                     </View>
-                    <View style={Style.historyList}>
-                        {this.state.history.length != 0
-                            ? this.state.history.map((row, i) => {
-                                return (
-                                    <List.Item
-                                        key={i}
-                                        title={row.wanted}
-                                        description={row.process_type}
-                                        left={props => <List.Icon {...props} icon="folder" />}
-                                        style={Style.historyCard}
-                                    />
-                                )
-                            })
-                            : <View>
-                                <Text style={Style.notFoundText}>Arama Geçmişi Bulunamadı.</Text>
-                            </View>}
-                    </View>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+                </ScrollView>
+            </SafeAreaView>
         )
     }
 }
 
-export default History;
+export default withNavigationFocus(History);
