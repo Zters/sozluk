@@ -61,14 +61,14 @@ class History extends React.Component {
                     </View>
                     <View style={Style.formGroup2}>
                         <View style={Style.formGroup3}>
-                            <FontAwesome name="history" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
+                            <FontAwesome name="history" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20, marginTop: -6, marginRight: 5 }} />
                             <Text style={Style.historyText}>
                                 Arama Geçmişini
                         </Text>
                             <TouchableOpacity onPress={() => this.truncateTable()} style={Style.historyButton}>
                                 <Text style={Style.historyButtonText}>Listeyi Temizle</Text>
+                                <FontAwesome name="trash" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20, marginLeft: 5}} />
                             </TouchableOpacity>
-                            <FontAwesome name="trash" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
                         </View>
                         <View style={Style.historyList}>
                             {this.state.history.length != 0
@@ -78,7 +78,7 @@ class History extends React.Component {
                                             key={i}
                                             title={row.wanted}
                                             description={row.process_type}
-                                            left={props => <List.Icon {...props} icon="folder" />}
+                                            left={props => <FontAwesome name="font" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />}
                                             style={Style.historyCard}
                                         />
                                     )

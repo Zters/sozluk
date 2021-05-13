@@ -37,44 +37,21 @@ class Saved extends React.Component {
         }
     }
 
-    truncateTable() {
+    async truncateTable() {
         try {
-            Constants.SqlService.select('saved', '*').then(result => {
-                result.length != 0
-                    ?
-                    Constants.SqlService.delete('saved', '*').then(result2 => {
-                        console.log("Kayıtlı kelimeler silindi.");
-                    })
-                    : console.log("Kayıtlı kelime bulunamadı.");
-            })
+            const result = await Constants.SqlService.select('saved', '*');
+            result.length != 0
+                ? await Constants.SqlService.delete('saved', '*').then(result2 => {
+                    this.componentDidMount();
+                    ToastAndroid.show("Kayıtlı kelimeler silindi", ToastAndroid.SHORT)
+                })
+                : ToastAndroid.show("Kayıtlı kelime bulunamadı", ToastAndroid.SHORT)
         } catch (error) {
             ToastAndroid.show("Bir hata oluştu. Hata kodu: S000g4", ToastAndroid.SHORT)
         }
     }
 
-    instertsavedTable() {
-        try {
-            const getDate = () => {
-                var date = new Date().getDate();
-                var month = new Date().getMonth() + 1;
-                var year = new Date().getFullYear();
-                var hours = new Date().getHours();
-                var min = new Date().getMinutes();
-                return hours + ':' + min + ' | ' + date + '/' + month + '/' + year;
-            }
-            Constants.SqlService.insert('saved', ['word', 'description', 'time'], ['Kelime', 'Açıklama', getDate()]);
-
-            Constants.SqlService.select('saved', '*').then(result => {
-                console.log(result);
-            })
-            this.componentDidMount();
-        } catch (error) {
-            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000f5", ToastAndroid.SHORT)
-        }
-    }
-
     render() {
-        console.log(this.state.saved);
         const SP = this.props.screenProps;
         const { navigate } = this.props.navigation;
         return (
@@ -85,14 +62,15 @@ class Saved extends React.Component {
                     </View>
                     <View style={Style.formGroup2}>
                         <View style={Style.formGroup3}>
-                            <FontAwesome name="star" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
+                            <FontAwesome name="star" style={{ marginTop: -6, marginRight: 5, color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />
                             <Text style={Style.savedText}>
                                 Favori Kelimeler
                             </Text>
                             <TouchableOpacity onPress={() => this.truncateTable()} style={Style.savedButton}>
                                 <Text style={Style.savedButtonText}>Listeyi Temizle</Text>
+                                <FontAwesome name="trash" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20, marginLeft: 5 }} />
+
                             </TouchableOpacity>
-                            <FontAwesome name="trash" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }}> </FontAwesome>
                         </View>
                         <View style={Style.savedList}>
                             {this.state.saved.length != 0
@@ -100,9 +78,9 @@ class Saved extends React.Component {
                                     return (
                                         <List.Item
                                             key={i}
-                                            title={row.wanted}
-                                            description={row.process_type}
-                                            left={props => <List.Icon {...props} icon="folder" />}
+                                            title={row.word}
+                                            description={row.description}
+                                            left={props => <FontAwesome name="font" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />}
                                             style={Style.savedCard}
                                         />
                                     )

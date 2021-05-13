@@ -29,7 +29,7 @@ export default StyleSheet.create({
         padding: 20
     },
     formGroup3: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     savedCard: {
         borderRadius: 15,
@@ -40,8 +40,14 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
     },
     savedButton: {
+        marginTop: -5,
         marginLeft: 110,
-        marginRight: 10
+        marginRight: 10,
+        flexDirection: 'row', 
+        width: 140,
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     savedText: {
         color: '#8D9299',

@@ -8,6 +8,7 @@ Sözlük V1.0 Hata Kodları ve Kod Kısımları
 S000e1 - Home.js         / ComponentDidMount Function
 S000f2 - Home.js         / queryWord Function
 S000h3 - Home.js         / insertHistory Function
+S000h5 - Home.js         / savedWord Function
 S000e3 - Saved.js        / componentDidMount Function
 S000g4 - Saved.js        / truncateTable Function
 S000f5 - Saved.js        / truncateTable Function

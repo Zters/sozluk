@@ -40,8 +40,14 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
     },
     historyButton: {
+        marginTop: -5,
         marginLeft: 110,
-        marginRight: 10
+        marginRight: 10,
+        flexDirection: 'row', 
+        width: 140,
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     historyText: {
         color: '#8D9299',

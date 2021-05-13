@@ -59,13 +59,40 @@ class Home extends React.Component {
                     Animated.timing(this.animatedHeight, {
                         toValue: 300,
                         duration: 500,
-                    }).start(),
-                    ToastAndroid.show("Arama başarılı.", ToastAndroid.SHORT))
+                    }).start())
                 : this.setState({ proposal: [] })
         } catch (error) {
             ToastAndroid.show("Bir hata oluştu. Hata kodu: S000f2", ToastAndroid.SHORT)
         }
+    }
 
+    clearQuery() {
+        this.setState({ searchQuery: '', proposal: [] })
+    }
+
+    async savedWord(value) {
+        try {
+            const querySaved = await Constants.SqlService.select('saved', '*', 'word = ?', [value]);
+            querySaved.length === 0
+                ? (Constants.wMQuery(value).then((res) => {
+                    Constants.SqlService.insert(
+                        'saved',
+                        [
+                            'word',
+                            'description',
+                            'time',
+                        ],
+                        [
+                            value,
+                            res.status == "success" ? res.result : "Açıklama bulunamadı.",
+                            Constants.Functions.getDate()
+                        ])
+                }),
+                    ToastAndroid.show(value + " kelimesi kaydedildi.", ToastAndroid.SHORT))
+                : ToastAndroid.show("Bu kelime zaten kayıtlı!", ToastAndroid.SHORT)
+        } catch (error) {
+            ToastAndroid.show("Bir hata oluştu. Hata kodu: S000h5", ToastAndroid.SHORT)
+        }
     }
 
     async insertHistory(value) {
@@ -119,7 +146,8 @@ class Home extends React.Component {
                                                             navigate('WordDetail', {
                                                                 word: row.madde,
                                                                 onGoBack: () => this.componentDidMount(),
-                                                            })
+                                                            }),
+                                                            this.clearQuery()
                                                         )
                                                     }>
                                                         <List.Item
@@ -153,26 +181,25 @@ class Home extends React.Component {
                         {this.state.history.length != 0
                             ? this.state.history.map((row, i) => {
                                 return (
-                                    <>
-                                        <View style={Style.historyList}>
-                                            <TouchableOpacity key={i} onPress={
-                                                () => (
-                                                    navigate('WordDetail', {
-                                                        word: row.wanted,
-                                                    })
-                                                )
-                                            }>
-                                                <List.Item
-                                                    title={row.wanted}
-                                                    description={row.description}
-                                                    left={props => <List.Icon {...props} icon="folder" />}
-                                                    style={Style.historyCard}
-                                                    titleStyle={Style.historyCard}
-                                                    descriptionStyle={Style.historyCard2}
-                                                />
-                                            </TouchableOpacity>
-                                        </View>
-                                    </>
+                                    <View key={i} style={Style.historyList}>
+                                        <TouchableOpacity onPress={
+                                            () => (
+                                                navigate('WordDetail', {
+                                                    word: row.wanted,
+                                                })
+                                            )
+                                        }>
+                                            <List.Item
+                                                title={row.wanted}
+                                                description={row.description}
+                                                left={props => <FontAwesome name="font" style={{ color: '#8D9299', alignSelf: 'center', fontSize: 20 }} />}
+                                                right={props => <TouchableOpacity onPress={() => this.savedWord(row.wanted)}><FontAwesome name="star" style={{ margin: 20, color: '#8D9299', alignSelf: 'flex-start', fontSize: 20, marginRight: 20 }} /></TouchableOpacity>}
+                                                style={Style.historyCard}
+                                                titleStyle={Style.historyCard}
+                                                descriptionStyle={Style.historyCard2}
+                                            />
+                                        </TouchableOpacity>
+                                    </View>
                                 )
                             }).reverse().slice(0, 5)
                             : <>
