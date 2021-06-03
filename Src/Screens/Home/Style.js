@@ -25,7 +25,7 @@ export default StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: 'white',
         marginTop: -15,
-        padding: 20
+        padding: 20,
     },
     formGroup3: {
         flexDirection: 'row'
@@ -118,7 +118,8 @@ export default StyleSheet.create({
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
         elevation: 10,
-        marginTop: 25
+        marginTop: 25,
+        height: 300
     },
     box: {
         width: 50,
